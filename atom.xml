@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[JVM Rocks]]></title>
   <link href="http://yerinle.github.com/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2013-02-24T15:46:55+00:00</updated>
+  <updated>2013-02-24T17:15:32+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Yinka Erinle]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: Extract a folder from a zip file]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/"/>
+    <updated>2013-02-24T16:14:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file</id>
+    <content type="html"><![CDATA[<p><em>Let&#8217;s say you have a zip file with the containing these two folders(lib, classes) and you
+want to extract the lib folder to another zip file.</em></p>
+
+<p><em>home.zip<br/>
+ -lib<br/>
+ -classes</em></p>
+
+<p><em>first extract the zip contents into a folder</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="n">extractZip</span> <span class="o">&lt;&lt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="n">tasks</span><span class="o">[</span><span class="s1">&#39;home.zip&#39;</span><span class="o">].</span><span class="na">archivePath</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;temp&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>then use another task to create the desired zip file</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">createZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Zip</span><span class="o">,</span> <span class="nl">dependsOn:</span> <span class="n">extractZip</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">&#39;lib&#39;</span>
+</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home/lib&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
+</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;dist&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
 </feed>

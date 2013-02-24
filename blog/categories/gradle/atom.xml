@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gradle | JVM Rocks]]></title>
+  <link href="http://yerinle.github.com/blog/categories/gradle/atom.xml" rel="self"/>
+  <link href="http://yerinle.github.com/"/>
+  <updated>2013-02-24T17:15:32+00:00</updated>
+  <id>http://yerinle.github.com/</id>
+  <author>
+    <name><![CDATA[Yinka Erinle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: Extract a folder from a zip file]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/"/>
+    <updated>2013-02-24T16:14:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file</id>
+    <content type="html"><![CDATA[<p><em>Let's say you have a zip file with the containing these two folders(lib, classes) and you
+want to extract the lib folder to another zip file.</em></p>
+
+<p><em>home.zip<br/>
+ -lib<br/>
+ -classes</em></p>
+
+<p><em>first extract the zip contents into a folder</em>
+``` groovy
+task extractZip &lt;&lt; {</p>
+
+<pre><code>from zipTree(tasks['home.zip'].archivePath)
+destinationDir = file('temp')
+</code></pre>
+
+<p>} <br/>
+```</p>
+
+<p><em>then use another task to create the desired zip file</em>
+``` groovy
+task createZip(type: Zip, dependsOn: extractZip) {</p>
+
+<pre><code>baseName = 'lib'
+from ('temp/home/lib') { include 'lib/**'}
+destinationDir = file('dist')
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
