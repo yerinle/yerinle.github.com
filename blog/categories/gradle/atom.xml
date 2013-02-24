@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gradle | JVM Rocks]]></title>
   <link href="http://yerinle.github.com/blog/categories/gradle/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2013-02-24T17:15:32+00:00</updated>
+  <updated>2013-02-24T18:44:35+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -27,9 +27,9 @@ want to extract the lib folder to another zip file.</em></p>
 
 <p><em>first extract the zip contents into a folder</em>
 ``` groovy
-task extractZip &lt;&lt; {</p>
+task extractZip(type: Copy) {</p>
 
-<pre><code>from zipTree(tasks['home.zip'].archivePath)
+<pre><code>from zipTree('home.zip')
 destinationDir = file('temp')
 </code></pre>
 
@@ -41,7 +41,7 @@ destinationDir = file('temp')
 task createZip(type: Zip, dependsOn: extractZip) {</p>
 
 <pre><code>baseName = 'lib'
-from ('temp/home/lib') { include 'lib/**'}
+from ('temp/home') { include 'lib/**'}
 destinationDir = file('dist')
 </code></pre>
 

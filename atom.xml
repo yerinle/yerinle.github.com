@@ -4,7 +4,7 @@
   <title><![CDATA[JVM Rocks]]></title>
   <link href="http://yerinle.github.com/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2013-02-24T17:15:32+00:00</updated>
+  <updated>2013-02-24T18:44:35+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -31,8 +31,8 @@ want to extract the lib folder to another zip file.</em></p>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="n">extractZip</span> <span class="o">&lt;&lt;</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="n">tasks</span><span class="o">[</span><span class="s1">&#39;home.zip&#39;</span><span class="o">].</span><span class="na">archivePath</span><span class="o">)</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">extractZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="s1">&#39;home.zip&#39;</span><span class="o">)</span>
 </span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;temp&#39;</span><span class="o">)</span>
 </span><span class='line'><span class="o">}</span>  
 </span></code></pre></td></tr></table></div></figure>
@@ -47,7 +47,7 @@ want to extract the lib folder to another zip file.</em></p>
 <span class='line-number'>5</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">createZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Zip</span><span class="o">,</span> <span class="nl">dependsOn:</span> <span class="n">extractZip</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">&#39;lib&#39;</span>
-</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home/lib&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
+</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
 </span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;dist&#39;</span><span class="o">)</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
