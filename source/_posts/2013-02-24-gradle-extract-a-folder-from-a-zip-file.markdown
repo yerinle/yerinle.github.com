@@ -15,8 +15,8 @@ want to extract the lib folder to another zip file.*
 
 *first extract the zip contents into a folder*
 ``` groovy
-task extractZip << {
-	from zipTree(tasks['home.zip'].archivePath)
+task extractZip(type: Copy) {
+	from zipTree('home.zip')
 	destinationDir = file('temp')
 }	
 ```
@@ -25,7 +25,7 @@ task extractZip << {
 ``` groovy
 task createZip(type: Zip, dependsOn: extractZip) {
 	baseName = 'lib'
-	from ('temp/home/lib') { include 'lib/**'}
+	from ('temp/home') { include 'lib/**'}
 	destinationDir = file('dist')
 }
 ```
