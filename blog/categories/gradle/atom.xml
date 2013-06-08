@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gradle | JVM Rocks]]></title>
   <link href="http://yerinle.github.com/blog/categories/gradle/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2013-02-24T18:44:35+00:00</updated>
+  <updated>2013-06-08T16:59:09+01:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: filter a file using ant filters]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/"/>
+    <updated>2013-02-27T05:46:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters</id>
+    <content type="html"><![CDATA[<p><em>If you want to replace tokens in a file with values from a properties file</em></p>
+
+<p><em>For example your file (profile.txt) contains the entry</em>
+<code>
+name=@name@
+</code>
+<em>and your properties file (values.properties) contains an entry</em>
+<code>
+name=Ted Jurey
+</code></p>
+
+<p>``` groovy
+import org.apache.tools.ant.filter.ReplaceTokens</p>
+
+<p>task filter(type: Copy) {</p>
+
+<pre><code>from 'profile.txt'
+into 'filtered'
+def propreties = new Properties()
+file('values.properties').withInputStream { 
+    properties.load(it)
+}
+
+filter(ReplaceTokens, tokens: properties)
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Gradle: Extract a folder from a zip file]]></title>

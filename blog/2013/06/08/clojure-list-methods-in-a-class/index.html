@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>JVM Rocks</title>
+  <title>Clojure: List public methods in a java class - JVM Rocks</title>
   <meta name="author" content="Yinka Erinle">
 
   
@@ -23,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yerinle.github.com/">
+  <link rel="canonical" href="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,15 +67,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/06/08/clojure-list-methods-in-a-class/">Clojure: List Public Methods in a Java Class</a></h1>
+      <h1 class="entry-title">Clojure: List Public Methods in a Java Class</h1>
     
     
       <p class="meta">
@@ -98,7 +95,7 @@
   </header>
 
 
-  <div class="entry-content"><p><em>use the function below to list the public methods in a java class</em></p>
+<div class="entry-content"><p><em>use the function below to list the public methods in a java class</em></p>
 
 <figure class='code'><figcaption><span>list-methods function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -147,100 +144,16 @@
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/">Gradle: Filter a File Using Ant Filters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Yinka Erinle</span></span>
 
-<time datetime="2013-02-27T05:46:00+00:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>If you want to replace tokens in a file with values from a properties file</em></p>
-
-<p><em>For example your file (profile.txt) contains the entry</em></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>name=@name@</span></code></pre></td></tr></table></div></figure>
-
-
-<p>
-<em>and your properties file (values.properties) contains an entry</em></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>name=Ted Jurey</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kn">import</span> <span class="nn">org.apache.tools.ant.filter.ReplaceTokens</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">task</span> <span class="nf">filter</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">from</span> <span class="s1">&#39;profile.txt&#39;</span>
-</span><span class='line'>  <span class="n">into</span> <span class="s1">&#39;filtered&#39;</span>
-</span><span class='line'>  <span class="kt">def</span> <span class="n">propreties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
-</span><span class='line'>  <span class="n">file</span><span class="o">(</span><span class="s1">&#39;values.properties&#39;</span><span class="o">).</span><span class="na">withInputStream</span> <span class="o">{</span>
-</span><span class='line'>      <span class="n">properties</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">it</span><span class="o">)</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">filter</span><span class="o">(</span><span class="n">ReplaceTokens</span><span class="o">,</span> <span class="nl">tokens:</span> <span class="n">properties</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/">Gradle: Extract a Folder From a Zip File</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -252,60 +165,38 @@
   
 
 
-<time datetime="2013-02-24T16:14:00+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2013</time>
-        
-      </p>
+<time datetime="2013-06-08T14:51:00+01:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/" data-via="" data-counturl="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/" >Tweet</a>
+  
+  
+  
+</div>
 
-
-  <div class="entry-content"><p><em>Let&#8217;s say you have a zip file with the containing these two folders(lib, classes) and you
-want to extract the lib folder to another zip file.</em></p>
-
-<p><em>home.zip<br/>
- -lib<br/>
- -classes</em></p>
-
-<p><em>first extract the zip contents into a folder</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">extractZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="s1">&#39;home.zip&#39;</span><span class="o">)</span>
-</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;temp&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>  
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>then use another task to create the desired zip file</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">createZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Zip</span><span class="o">,</span> <span class="nl">dependsOn:</span> <span class="n">extractZip</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">&#39;lib&#39;</span>
-</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
-</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;dist&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/" title="Previous Post: Gradle: filter a file using ant filters">&laquo; Gradle: filter a file using ant filters</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -334,6 +225,7 @@ want to extract the lib folder to another zip file.</em></p>
 
   
 </aside>
+
 
     </div>
   </div>

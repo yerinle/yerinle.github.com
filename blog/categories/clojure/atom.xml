@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: clojure | JVM Rocks]]></title>
+  <link href="http://yerinle.github.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://yerinle.github.com/"/>
+  <updated>2013-06-08T16:59:09+01:00</updated>
+  <id>http://yerinle.github.com/</id>
+  <author>
+    <name><![CDATA[Yinka Erinle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure: List public methods in a java class]]></title>
+    <link href="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/"/>
+    <updated>2013-06-08T14:51:00+01:00</updated>
+    <id>http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class</id>
+    <content type="html"><![CDATA[<p><em>use the function below to list the public methods in a java class</em></p>
+
+<p>``` clojure list-methods function
+(defn list-methods
+  "List methods in a class"
+  [c]
+  (clojure.pprint/pprint</p>
+
+<pre><code>(map #(.toString %) (.getMethods c))))
+</code></pre>
+
+<p>```
+<em>or using the threading macro</em></p>
+
+<p>``` clojure list-methods function : using threading macro
+(defn list-methods
+  "List methods in a class"
+  [c]
+  (->> c</p>
+
+<pre><code>(.getMethods)
+(map #(.toString %))
+clojure.pprint/pprint))
+</code></pre>
+
+<p>```
+<em>examples</em></p>
+
+<p>``` clojure examples
+;; methods in the String class
+(list-methods String)</p>
+
+<p>;; public methods in the Long class
+(list-methods Long)
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
