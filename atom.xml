@@ -4,7 +4,7 @@
   <title><![CDATA[JVM Rocks]]></title>
   <link href="http://yerinle.github.com/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2013-06-08T16:59:09+01:00</updated>
+  <updated>2013-12-24T23:23:21+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vertx: Leiningen plugin for vertx developlment (clojure)]]></title>
+    <link href="http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/"/>
+    <updated>2013-12-24T19:07:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure</id>
+    <content type="html"><![CDATA[<p><em>Run the following commands to setup project</em></p>
+
+<p><em>where <code>project-name</code> is the name of the project</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lein new vertx &lt;project-name&gt;
+</span><span class='line'>cd &lt;project-name&gt;
+</span><span class='line'>lein vertx run</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/isaiah/lein-vertx">github project</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure: List public methods in a java class]]></title>

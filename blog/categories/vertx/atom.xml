@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vertx | JVM Rocks]]></title>
+  <link href="http://yerinle.github.com/blog/categories/vertx/atom.xml" rel="self"/>
+  <link href="http://yerinle.github.com/"/>
+  <updated>2013-12-24T23:23:21+00:00</updated>
+  <id>http://yerinle.github.com/</id>
+  <author>
+    <name><![CDATA[Yinka Erinle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vertx: Leiningen plugin for vertx developlment (clojure)]]></title>
+    <link href="http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/"/>
+    <updated>2013-12-24T19:07:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure</id>
+    <content type="html"><![CDATA[<p><em>Run the following commands to setup project</em></p>
+
+<p><em>where <code>project-name</code> is the name of the project</em></p>
+
+<p><code>
+lein new vertx &lt;project-name&gt;
+cd &lt;project-name&gt;
+lein vertx run
+</code></p>
+
+<p><a href="https://github.com/isaiah/lein-vertx">github project</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,12 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Gradle: Extract a folder from a zip file - JVM Rocks</title>
+  <title>Vertx: Leiningen plugin for vertx developlment (clojure) - JVM Rocks</title>
   <meta name="author" content="Yinka Erinle">
 
   
-  <meta name="description" content="Let&#8217;s say you have a zip file with the containing these two folders(lib, classes) and you
-want to extract the lib folder to another zip file. &hellip;">
+  <meta name="description" content="Run the following commands to setup project where project-name is the name of the project 1
+2
+3
+lein new vertx &lt;project-name&gt;
+cd &lt;project- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +22,7 @@ want to extract the lib folder to another zip file. &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/">
+  <link rel="canonical" href="http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +71,7 @@ want to extract the lib folder to another zip file. &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Gradle: Extract a Folder From a Zip File</h1>
+      <h1 class="entry-title">Vertx: Leiningen Plugin for Vertx Developlment (Clojure)</h1>
     
     
       <p class="meta">
@@ -84,47 +87,26 @@ want to extract the lib folder to another zip file. &hellip;">
   
 
 
-<time datetime="2013-02-24T16:14:00+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2013</time>
+<time datetime="2013-12-24T19:07:00+00:00" pubdate data-updated="true">Dec 24<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><em>Let&#8217;s say you have a zip file with the containing these two folders(lib, classes) and you
-want to extract the lib folder to another zip file.</em></p>
+<div class="entry-content"><p><em>Run the following commands to setup project</em></p>
 
-<p><em>home.zip<br/>
- -lib<br/>
- -classes</em></p>
+<p><em>where <code>project-name</code> is the name of the project</em></p>
 
-<p><em>first extract the zip contents into a folder</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">extractZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="s1">&#39;home.zip&#39;</span><span class="o">)</span>
-</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;temp&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>  
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lein new vertx &lt;project-name&gt;
+</span><span class='line'>cd &lt;project-name&gt;
+</span><span class='line'>lein vertx run</span></code></pre></td></tr></table></div></figure>
 
 
-<p><em>then use another task to create the desired zip file</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">createZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Zip</span><span class="o">,</span> <span class="nl">dependsOn:</span> <span class="n">extractZip</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">&#39;lib&#39;</span>
-</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
-</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;dist&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><a href="https://github.com/isaiah/lein-vertx">github project</a></p>
 </div>
 
 
@@ -147,12 +129,12 @@ want to extract the lib folder to another zip file.</em></p>
   
 
 
-<time datetime="2013-02-24T16:14:00+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2013</time>
+<time datetime="2013-12-24T19:07:00+00:00" pubdate data-updated="true">Dec 24<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gradle/'>gradle</a>
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/vertx/'>vertx</a>
   
 </span>
 
@@ -161,7 +143,7 @@ want to extract the lib folder to another zip file.</em></p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/" data-via="" data-counturl="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/" data-via="" data-counturl="http://yerinle.github.com/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/" >Tweet</a>
   
   
   
@@ -170,8 +152,8 @@ want to extract the lib folder to another zip file.</em></p>
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/06/08/clojure-list-methods-in-a-class/" title="Previous Post: Clojure: List public methods in a java class">&laquo; Clojure: List public methods in a java class</a>
       
-        <a class="basic-alignment right" href="/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/" title="Next Post: Gradle: filter a file using ant filters">Gradle: filter a file using ant filters &raquo;</a>
       
     </p>
   </footer>
