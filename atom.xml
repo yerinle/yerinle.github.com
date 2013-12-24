@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[JVM Rocks]]></title>
+  <link href="http://yerinle.github.com/atom.xml" rel="self"/>
+  <link href="http://yerinle.github.com/"/>
+  <updated>2013-06-08T16:59:09+01:00</updated>
+  <id>http://yerinle.github.com/</id>
+  <author>
+    <name><![CDATA[Yinka Erinle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure: List public methods in a java class]]></title>
+    <link href="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/"/>
+    <updated>2013-06-08T14:51:00+01:00</updated>
+    <id>http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class</id>
+    <content type="html"><![CDATA[<p><em>use the function below to list the public methods in a java class</em></p>
+
+<figure class='code'><figcaption><span>list-methods function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">list-methods</span>
+</span><span class='line'>  <span class="s">&quot;List methods in a class&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">c</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">clojure.pprint/pprint</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">.toString</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nf">.getMethods</span> <span class="nv">c</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>or using the threading macro</em></p>
+
+<figure class='code'><figcaption><span>list-methods function : using threading macro</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">list-methods</span>
+</span><span class='line'>  <span class="s">&quot;List methods in a class&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">c</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">c</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">.getMethods</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">.toString</span> <span class="nv">%</span><span class="p">))</span>
+</span><span class='line'>    <span class="nv">clojure.pprint/pprint</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>examples</em></p>
+
+<figure class='code'><figcaption><span>examples</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; methods in the String class</span>
+</span><span class='line'><span class="p">(</span><span class="nf">list-methods</span> <span class="nv">String</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; public methods in the Long class</span>
+</span><span class='line'><span class="p">(</span><span class="nf">list-methods</span> <span class="nv">Long</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: filter a file using ant filters]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/"/>
+    <updated>2013-02-27T05:46:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters</id>
+    <content type="html"><![CDATA[<p><em>If you want to replace tokens in a file with values from a properties file</em></p>
+
+<p><em>For example your file (profile.txt) contains the entry</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>name=@name@</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+<em>and your properties file (values.properties) contains an entry</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>name=Ted Jurey</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kn">import</span> <span class="nn">org.apache.tools.ant.filter.ReplaceTokens</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">task</span> <span class="nf">filter</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="s1">&#39;profile.txt&#39;</span>
+</span><span class='line'>  <span class="n">into</span> <span class="s1">&#39;filtered&#39;</span>
+</span><span class='line'>  <span class="kt">def</span> <span class="n">propreties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">()</span>
+</span><span class='line'>  <span class="n">file</span><span class="o">(</span><span class="s1">&#39;values.properties&#39;</span><span class="o">).</span><span class="na">withInputStream</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">properties</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">it</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">filter</span><span class="o">(</span><span class="n">ReplaceTokens</span><span class="o">,</span> <span class="nl">tokens:</span> <span class="n">properties</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: Extract a folder from a zip file]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/"/>
+    <updated>2013-02-24T16:14:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file</id>
+    <content type="html"><![CDATA[<p><em>Let&#8217;s say you have a zip file with the containing these two folders(lib, classes) and you
+want to extract the lib folder to another zip file.</em></p>
+
+<p><em>home.zip<br/>
+ -lib<br/>
+ -classes</em></p>
+
+<p><em>first extract the zip contents into a folder</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">extractZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Copy</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="nf">zipTree</span><span class="o">(</span><span class="s1">&#39;home.zip&#39;</span><span class="o">)</span>
+</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;temp&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>then use another task to create the desired zip file</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">task</span> <span class="nf">createZip</span><span class="o">(</span><span class="nl">type:</span> <span class="n">Zip</span><span class="o">,</span> <span class="nl">dependsOn:</span> <span class="n">extractZip</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">baseName</span> <span class="o">=</span> <span class="s1">&#39;lib&#39;</span>
+</span><span class='line'>  <span class="n">from</span> <span class="o">(</span><span class="s1">&#39;temp/home&#39;</span><span class="o">)</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;lib/**&#39;</span><span class="o">}</span>
+</span><span class='line'>  <span class="n">destinationDir</span> <span class="o">=</span> <span class="n">file</span><span class="o">(</span><span class="s1">&#39;dist&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+</feed>

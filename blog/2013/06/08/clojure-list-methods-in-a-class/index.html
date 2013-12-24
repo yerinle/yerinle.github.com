@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Clojure: List public methods in a java class - JVM Rocks</title>
+  <meta name="author" content="Yinka Erinle">
+
+  
+  <meta name="description" content="use the function below to list the public methods in a java class list-methods function1
+2
+3
+4
+5
+(defn list-methods &quot;List methods in a class& &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="JVM Rocks" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">JVM Rocks</a></h1>
+  
+    <h2>java, groovy, grails, gradle, clojure.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:yerinle.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Clojure: List Public Methods in a Java Class</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-08T14:51:00+01:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>use the function below to list the public methods in a java class</em></p>
+
+<figure class='code'><figcaption><span>list-methods function</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">list-methods</span>
+</span><span class='line'>  <span class="s">&quot;List methods in a class&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">c</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">clojure.pprint/pprint</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">.toString</span> <span class="nv">%</span><span class="p">)</span> <span class="p">(</span><span class="nf">.getMethods</span> <span class="nv">c</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>or using the threading macro</em></p>
+
+<figure class='code'><figcaption><span>list-methods function : using threading macro</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">list-methods</span>
+</span><span class='line'>  <span class="s">&quot;List methods in a class&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">c</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">c</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">.getMethods</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nf">.toString</span> <span class="nv">%</span><span class="p">))</span>
+</span><span class='line'>    <span class="nv">clojure.pprint/pprint</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>examples</em></p>
+
+<figure class='code'><figcaption><span>examples</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; methods in the String class</span>
+</span><span class='line'><span class="p">(</span><span class="nf">list-methods</span> <span class="nv">String</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; public methods in the Long class</span>
+</span><span class='line'><span class="p">(</span><span class="nf">list-methods</span> <span class="nv">Long</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Yinka Erinle</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-08T14:51:00+01:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/" data-via="" data-counturl="http://yerinle.github.com/blog/2013/06/08/clojure-list-methods-in-a-class/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/" title="Previous Post: Gradle: filter a file using ant filters">&laquo; Gradle: filter a file using ant filters</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/06/08/clojure-list-methods-in-a-class/">Clojure: List public methods in a java class</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/">Gradle: filter a file using ant filters</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/">Gradle: Extract a folder from a zip file</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yinka Erinle -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

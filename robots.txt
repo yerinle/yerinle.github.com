@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://yerinle.github.com/sitemap.xml 

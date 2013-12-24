@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gradle | JVM Rocks]]></title>
+  <link href="http://yerinle.github.com/blog/categories/gradle/atom.xml" rel="self"/>
+  <link href="http://yerinle.github.com/"/>
+  <updated>2013-06-08T16:59:09+01:00</updated>
+  <id>http://yerinle.github.com/</id>
+  <author>
+    <name><![CDATA[Yinka Erinle]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: filter a file using ant filters]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters/"/>
+    <updated>2013-02-27T05:46:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/27/gradle-filter-a-file-using-ant-filters</id>
+    <content type="html"><![CDATA[<p><em>If you want to replace tokens in a file with values from a properties file</em></p>
+
+<p><em>For example your file (profile.txt) contains the entry</em>
+<code>
+name=@name@
+</code>
+<em>and your properties file (values.properties) contains an entry</em>
+<code>
+name=Ted Jurey
+</code></p>
+
+<p>``` groovy
+import org.apache.tools.ant.filter.ReplaceTokens</p>
+
+<p>task filter(type: Copy) {</p>
+
+<pre><code>from 'profile.txt'
+into 'filtered'
+def propreties = new Properties()
+file('values.properties').withInputStream { 
+    properties.load(it)
+}
+
+filter(ReplaceTokens, tokens: properties)
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle: Extract a folder from a zip file]]></title>
+    <link href="http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file/"/>
+    <updated>2013-02-24T16:14:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2013/02/24/gradle-extract-a-folder-from-a-zip-file</id>
+    <content type="html"><![CDATA[<p><em>Let's say you have a zip file with the containing these two folders(lib, classes) and you
+want to extract the lib folder to another zip file.</em></p>
+
+<p><em>home.zip<br/>
+ -lib<br/>
+ -classes</em></p>
+
+<p><em>first extract the zip contents into a folder</em>
+``` groovy
+task extractZip(type: Copy) {</p>
+
+<pre><code>from zipTree('home.zip')
+destinationDir = file('temp')
+</code></pre>
+
+<p>} <br/>
+```</p>
+
+<p><em>then use another task to create the desired zip file</em>
+``` groovy
+task createZip(type: Zip, dependsOn: extractZip) {</p>
+
+<pre><code>baseName = 'lib'
+from ('temp/home') { include 'lib/**'}
+destinationDir = file('dist')
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
