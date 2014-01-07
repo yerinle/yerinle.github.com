@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | JVM Rocks]]></title>
   <link href="http://yerinle.github.com/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2014-01-07T20:14:18+00:00</updated>
+  <updated>2014-01-07T20:19:50+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -41,8 +41,8 @@ lein repl
 (embed/set-vertx! (.vertx pm))
 </code></p>
 
-<p>now you can start a server, for example to start a http server do the following<br/>
-import the http namespace
+<p><em>now you can start a server, for example to start a http server do the following</em><br>
+<em>import the http namespace</em>
 <code>clojure
   (require '[vertx.http :as http]))
 </code></p>
