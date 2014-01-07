@@ -9,11 +9,9 @@
   <meta name="author" content="Yinka Erinle">
 
   
-  <meta name="description" content="Run the following commands to setup project where project-name is the name of the project 1
-2
-3
-lein new vertx &lt;project-name&gt;
-cd &lt;project- &hellip;">
+  <meta name="description" content="Setup project as described in previous post open a terminal window, run lein repl 1
+lein repl import the platform locator 1
+(import &#39;org.vertx. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,103 @@ cd &lt;project- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/07/vertx-create-vertx-instance-using-platform-manager-clojure/">Vertx: Create Vertx Instance Using Platform Manager (Clojure)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-07T18:38:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>Setup project as described in <a href="http://yerinle.github.io/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/">previous post</a></em></p>
+
+<p><em>open a terminal window, run lein repl</em></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>lein repl</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>import the platform locator</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">import </span><span class="ss">&#39;org.vertx.java.platform.PlatformLocator</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>create instance of platform manager</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">pm</span> <span class="p">(</span><span class="nf">.createPlatformManager</span> <span class="nv">PlatformLocator/factory</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>require vertx.embed and then set vertx instance atom</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.embed</span> <span class="ss">:as</span> <span class="nv">embed</span><span class="p">])</span>
+</span><span class='line'><span class="p">(</span><span class="nf">embed/set-vertx!</span> <span class="p">(</span><span class="nf">.vertx</span> <span class="nv">pm</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>now you can start a server, for example to start a http server do the following<br/>
+import the http namespace</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.http</span> <span class="ss">:as</span> <span class="nv">http</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>declare a request handler</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>  <span class="p">(</span><span class="kd">defn </span><span class="nv">req-handler</span> <span class="p">[</span><span class="nv">req</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">http/server-response</span> <span class="nv">req</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">http/add-header</span> <span class="s">&quot;Content-Type&quot;</span> <span class="s">&quot;text/html; charset=UTF-8&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">http/end</span> <span class="s">&quot;&lt;html&gt;&lt;body&gt;&lt;h4&gt;It&#39;s working!&lt;/h4&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>start server using the handler and assign it to a variable server</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">server</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">http/server</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">http/on-request</span> <span class="nv">req-handler</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">http/listen</span> <span class="mi">8080</span> <span class="s">&quot;localhost&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -360,6 +455,10 @@ want to extract the lib folder to another zip file.</em></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/07/vertx-create-vertx-instance-using-platform-manager-clojure/">Vertx: Create vertx instance using Platform Manager (clojure)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/">Vertx: Leiningen plugin for vertx developlment (clojure)</a>
       </li>
     
@@ -389,7 +488,7 @@ want to extract the lib folder to another zip file.</em></p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Yinka Erinle -
+  Copyright &copy; 2014 - Yinka Erinle -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
