@@ -30,6 +30,7 @@ lein repl
 ```
 
 *now you can start a server, for example to start a http server do the following*<br>
+
 *import the http namespace*
 ``` clojure
   (require '[vertx.http :as http]))
