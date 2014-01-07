@@ -5,13 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Vertx: Create vertx instance using Platform Manager (clojure) - JVM Rocks</title>
+  <title>Vertx: Create vertx instance in cluster mode (clojure) - JVM Rocks</title>
   <meta name="author" content="Yinka Erinle">
 
   
   <meta name="description" content="Setup project as described in previous post open a terminal window, run lein repl 1
-lein repl import the platform locator 1
-(import &#39;org.vertx. &hellip;">
+lein repl require the following namespaces 1
+2
+3
+(require &#39;[ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +22,7 @@ lein repl import the platform locator 1
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-using-platform-manager-clojure/">
+  <link rel="canonical" href="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-in-cluster-mode-clojure/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +71,7 @@ lein repl import the platform locator 1
   
   <header>
     
-      <h1 class="entry-title">Vertx: Create Vertx Instance Using Platform Manager (Clojure)</h1>
+      <h1 class="entry-title">Vertx: Create Vertx Instance in Cluster Mode (Clojure)</h1>
     
     
       <p class="meta">
@@ -85,7 +87,7 @@ lein repl import the platform locator 1
   
 
 
-<time datetime="2014-01-07T18:38:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2014</time>
+<time datetime="2014-01-07T20:36:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2014</time>
         
       </p>
     
@@ -100,26 +102,30 @@ lein repl import the platform locator 1
 </pre></td><td class='code'><pre><code class=''><span class='line'>lein repl</span></code></pre></td></tr></table></div></figure>
 
 
-<p><em>import the platform locator</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">import </span><span class="ss">&#39;org.vertx.java.platform.PlatformLocator</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>create instance of platform manager</em></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">pm</span> <span class="p">(</span><span class="nf">.createPlatformManager</span> <span class="nv">PlatformLocator/factory</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><em>require vertx.embed and then set vertx instance atom</em></p>
+<p><em>require the following namespaces</em></p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.embed</span> <span class="ss">:as</span> <span class="nv">embed</span><span class="p">])</span>
-</span><span class='line'><span class="p">(</span><span class="nf">embed/set-vertx!</span> <span class="p">(</span><span class="nf">.vertx</span> <span class="nv">pm</span><span class="p">))</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.embed</span> <span class="ss">:as</span> <span class="nv">embed</span><span class="p">]</span>
+</span><span class='line'>       <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.eventbus</span> <span class="ss">:as</span> <span class="nv">eb</span><span class="p">]</span>
+</span><span class='line'>       <span class="o">&#39;</span><span class="p">[</span><span class="nv">vertx.http</span> <span class="ss">:as</span> <span class="nv">http</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>set the following system property</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">System/setProperty</span> <span class="s">&quot;vertx.clusterManagerFactory&quot;</span>
+</span><span class='line'>                   <span class="s">&quot;org.vertx.java.spi.cluster.impl.hazelcast.HazelcastClusterManagerFactory&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>set the vertx instance</em></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'> <span class="p">(</span><span class="nf">embed/set-vertx!</span> <span class="p">(</span><span class="nf">embed/vertx</span> <span class="s">&quot;localhost&quot;</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -177,7 +183,7 @@ lein repl import the platform locator 1
   
 
 
-<time datetime="2014-01-07T18:38:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2014</time>
+<time datetime="2014-01-07T20:36:00+00:00" pubdate data-updated="true">Jan 7<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -191,7 +197,7 @@ lein repl import the platform locator 1
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-using-platform-manager-clojure/" data-via="" data-counturl="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-using-platform-manager-clojure/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-in-cluster-mode-clojure/" data-via="" data-counturl="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-in-cluster-mode-clojure/" >Tweet</a>
   
   
   
@@ -200,10 +206,8 @@ lein repl import the platform locator 1
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/" title="Previous Post: Vertx: Leiningen plugin for vertx developlment (clojure)">&laquo; Vertx: Leiningen plugin for vertx developlment (clojure)</a>
+        <a class="basic-alignment left" href="/blog/2014/01/07/vertx-create-vertx-instance-clojure/" title="Previous Post: Vertx: Create vertx instance(clojure)">&laquo; Vertx: Create vertx instance(clojure)</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/01/07/vertx-create-vertx-instance-clojure/" title="Next Post: Vertx: Create vertx instance(clojure)">Vertx: Create vertx instance(clojure) &raquo;</a>
       
     </p>
   </footer>

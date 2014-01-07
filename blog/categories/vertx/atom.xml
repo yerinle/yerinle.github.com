@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vertx | JVM Rocks]]></title>
   <link href="http://yerinle.github.com/blog/categories/vertx/atom.xml" rel="self"/>
   <link href="http://yerinle.github.com/"/>
-  <updated>2014-01-07T20:22:45+00:00</updated>
+  <updated>2014-01-07T20:44:24+00:00</updated>
   <id>http://yerinle.github.com/</id>
   <author>
     <name><![CDATA[Yinka Erinle]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vertx: Create vertx instance in cluster mode (clojure)]]></title>
+    <link href="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-in-cluster-mode-clojure/"/>
+    <updated>2014-01-07T20:36:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-in-cluster-mode-clojure</id>
+    <content type="html"><![CDATA[<p><em>Setup project as described in <a href="http://yerinle.github.io/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/">previous post</a></em></p>
+
+<p><em>open a terminal window, run lein repl</em>
+<code>
+lein repl
+</code></p>
+
+<p><em>require the following namespaces</em>
+``` clojure
+(require '[vertx.embed :as embed]</p>
+
+<pre><code>     '[vertx.eventbus :as eb] 
+     '[vertx.http :as http])
+</code></pre>
+
+<p>```</p>
+
+<p><em>set the following system property</em>
+```
+(System/setProperty "vertx.clusterManagerFactory"</p>
+
+<pre><code>                 "org.vertx.java.spi.cluster.impl.hazelcast.HazelcastClusterManagerFactory")
+</code></pre>
+
+<p>```
+<em>set the vertx instance</em></p>
+
+<p><code>
+ (embed/set-vertx! (embed/vertx "localhost"))
+</code></p>
+
+<p><em>now you can start a server, for example to start a http server do the following</em><br></p>
+
+<p><em>import the http namespace</em>
+<code>clojure
+  (require '[vertx.http :as http]))
+</code></p>
+
+<p><em>declare a request handler</em>
+``` clojure
+  (defn req-handler [req]
+  (-> (http/server-response req)</p>
+
+<pre><code>  (http/add-header "Content-Type" "text/html; charset=UTF-8")
+  (http/end "&lt;html&gt;&lt;body&gt;&lt;h4&gt;It's working!&lt;/h4&gt;&lt;/body&gt;&lt;/html&gt;")))
+</code></pre>
+
+<p>```</p>
+
+<p><em>start server using the handler and assign it to a variable server</em>
+```
+(def server (-> (http/server)</p>
+
+<pre><code>(http/on-request req-handler)
+(http/listen 8080 "localhost")))
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vertx: Create vertx instance(clojure)]]></title>
+    <link href="http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-clojure/"/>
+    <updated>2014-01-07T20:32:00+00:00</updated>
+    <id>http://yerinle.github.com/blog/2014/01/07/vertx-create-vertx-instance-clojure</id>
+    <content type="html"><![CDATA[<p><em>Setup project as described in <a href="http://yerinle.github.io/blog/2013/12/24/vertx-leiningen-plugin-for-vertx-developlment-clojure/">previous post</a></em></p>
+
+<p><em>open a terminal window, run lein repl</em>
+<code>
+lein repl
+</code></p>
+
+<p><em>require vertx.embed and then set vertx instance atom</em>
+<code>clojure
+(require '[vertx.embed :as embed])
+(embed/set-vertx! (embed/vertx))
+</code></p>
+
+<p><em>now you can start a server, for example to start a http server do the following</em><br></p>
+
+<p><em>import the http namespace</em>
+<code>clojure
+  (require '[vertx.http :as http]))
+</code></p>
+
+<p><em>declare a request handler</em>
+``` clojure
+  (defn req-handler [req]
+  (-> (http/server-response req)</p>
+
+<pre><code>  (http/add-header "Content-Type" "text/html; charset=UTF-8")
+  (http/end "&lt;html&gt;&lt;body&gt;&lt;h4&gt;Vertx Rocks!&lt;/h4&gt;&lt;/body&gt;&lt;/html&gt;")))
+</code></pre>
+
+<p>```</p>
+
+<p><em>start server using the handler and assign it to a variable server</em>
+```
+(def server (-> (http/server)</p>
+
+<pre><code>(http/on-request req-handler)
+(http/listen 8080 "localhost")))
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vertx: Create vertx instance using Platform Manager (clojure)]]></title>
